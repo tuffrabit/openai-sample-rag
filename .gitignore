@@ -1,0 +1,7 @@
+.env
+animals/
+*.db
+*.db-shm
+*.db-wal
+openai-sample-rag.exe
+openai-sample-rag
