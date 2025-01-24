@@ -10,7 +10,7 @@ A single CLI tool that has multiple possible flags. One flag to scan an adjacent
 1. Either build from source or download a pre-built binary from the releases
 2. Use the .env.sample file to create a .env file that contains a valid OpenAI API key and whatever username you wanna use
 3. Create an directory next the binary called "animals"
-4. Fill the animals directory with as many animal markdown files you can think of using the sample-animal.md as an example (the more the better). Each animal markdown file should be named with the animal name. Try to keep the contents inside each file to a minimum, othewise you'll run into token and context limitation issues with the OpenAI API. HERE ME ON THIS PART... You gotta really come up with some banger ridiculous animal names that YOU ARE SURE the AI has never heard of before.
+4. Fill the animals directory with as many animal markdown files you can think of using the sample-animal.md as an example (the more the better). Each animal markdown file should be named with the animal name. Try to keep the contents inside each file to a minimum, othewise you'll run into token and context limitation issues with the OpenAI API. HEAR ME ON THIS PART... You gotta really come up with some banger ridiculous animal names that YOU ARE SURE the AI has never heard of before.
 
 ## Running
 1. The first time you run this, you need to populate the DB. Use the "-populatedb" flag to do so. If the planets align and you have the .env file and animals directory setup correctly the app will fill the local DB with animal data and the linked embeddings from the OpenAI API. Once the DB is populated you won't have to do it again unless you change anything in the animals directory. Keep in mind, this step will use some amount of OpenAI API tokens and cost a small amount of real $$$. It's using a modest model so the expense should be minimal. *RUN AT YOUR OWN RISK*.
@@ -21,3 +21,4 @@ A single CLI tool that has multiple possible flags. One flag to scan an adjacent
 You *SHOULD* see the LLM either straight up hallucinate (lie) or say it has no idea about your stupid made up animals while skipping RAG. While using RAG, you should see the LLM pull in the embedded animal markdown as prompt data and actually give you something resembling a real answer.
 
 ![example](openairagtest-example.png)
+[Video explanation](https://youtu.be/9jaP9Gfntww)
