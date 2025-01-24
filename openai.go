@@ -107,24 +107,28 @@ func calculateProximity(a []float64, b []float64) (float64, error) {
 	return dotProduct / (math.Sqrt(aMag) * math.Sqrt(bMag)), nil
 }
 
-func DoPrompt(prompt string) (string, error) {
-	promptEmbedding, err := GenerateEmbedding(prompt)
-	if err != nil {
-		return "", fmt.Errorf("failed to generate embedding from prompt: %w", err)
-	}
+func DoPrompt(prompt string, skipRag bool) (string, error) {
+	fullPrompt := prompt
 
-	closest, err := getClosestToPrompt(promptEmbedding)
-	if err != nil {
-		return "", fmt.Errorf("failed to calculate the closest embedding to the prompt: %w", err)
-	}
+	if !skipRag {
+		promptEmbedding, err := GenerateEmbedding(prompt)
+		if err != nil {
+			return "", fmt.Errorf("failed to generate embedding from prompt: %w", err)
+		}
 
-	fullPrompt := fmt.Sprintf(`
-	Use the following information to answer the subsequent question.
-	Information:
-	%s
-	
-	Question:
-	%s`, closest, prompt)
+		closest, err := getClosestToPrompt(promptEmbedding)
+		if err != nil {
+			return "", fmt.Errorf("failed to calculate the closest embedding to the prompt: %w", err)
+		}
+
+		fullPrompt = fmt.Sprintf(`
+		Use the following information to answer the subsequent question.
+		Information:
+		%s
+		
+		Question:
+		%s`, closest, prompt)
+	}
 
 	chatCompletion, err := openaiClient.Chat.Completions.New(context.TODO(), openai.ChatCompletionNewParams{
 		Messages: openai.F([]openai.ChatCompletionMessageParamUnion{

@@ -14,6 +14,7 @@ func main() {
 	defer db.Close()
 	populateDb := flag.Bool("populatedb", false, "populate the db with animal chunks from markdown files in the adjacent animals directory")
 	prompt := flag.String("prompt", "", "your question for the AI overlord")
+	skipRag := flag.Bool("skiprag", false, "skip prompt engineering with RAG")
 	flag.Parse()
 
 	if *populateDb {
@@ -34,7 +35,7 @@ func main() {
 		os.Exit(0)
 	}
 
-	response, err := DoPrompt(*prompt)
+	response, err := DoPrompt(*prompt, *skipRag)
 	if err != nil {
 		log.Panicln("failed to prompt openai:", err)
 	}
