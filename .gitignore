@@ -5,3 +5,4 @@ animals/
 *.db-wal
 openai-sample-rag.exe
 openai-sample-rag
+openai-sample-rag.*.exe
